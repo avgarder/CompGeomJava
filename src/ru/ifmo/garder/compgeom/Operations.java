@@ -166,6 +166,31 @@ public class Operations {
      */
 
     public static boolean isPointInContour(Point2<Float64> p, Contour2<Float64> c) {
-        return false;
+        int countIntersects = 0;
+        for (int i = 0, size = c.size(); i < size; i++) {
+            if (p.equals(c.get(i))) {
+                return true;
+            }
+            Point2<Float64> p1, p2;
+            if (c.get(i).y.isLessThan(c.get(i + 1).y)) {
+                p1 = c.get(i);
+                p2 = c.get(i + 1);
+            } else {
+                p1 = c.get(i + 1);
+                p2 = c.get(i);
+            }
+            if (p.y.isLessThan(p1.y) || p.y.isGreaterThan(p2.y) || orientation(p1, p2, p) == Orientation.RIGHT) {
+                continue;
+            }
+
+            if (p.y.equals(c.get(i).y)) {
+                if (orientation(p, c.get(i), c.get(i + 1)) != orientation(p, c.get(i), c.get(i - 1))) {
+                    countIntersects++;
+                }
+            } else if (!p.y.equals(c.get(i + 1).y)) {
+                countIntersects++;
+            }
+        }
+        return countIntersects % 2 == 1;
     }
 }
