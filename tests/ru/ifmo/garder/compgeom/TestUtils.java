@@ -37,9 +37,6 @@ public class TestUtils {
     public static List<Point2<Float64>> getRandPoints(int count) {
         List<Point2<Float64>> points = new LinkedList<Point2<Float64>>();
         for (int i = 0; i < count; i++) {
-            if (i % 1000 == 0) {
-                System.out.println(i);
-            }
             points.add(getPoint2(rand.nextDouble(), rand.nextDouble()));
         }
         return points;
