@@ -7,8 +7,13 @@ import ru.ifmo.garder.compgeom.primitives.Segment2;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+
+import static ru.ifmo.garder.compgeom.Operations.*;
 
 public class TestUtils {
+    private static final Random rand = new Random();
+
     public static Point2<Float64> getPoint2(double x, double y) {
         return new Point2<Float64>(Float64.valueOf(x), Float64.valueOf(y));
     }
@@ -27,5 +32,25 @@ public class TestUtils {
             res.add(point);
         }
         return new Contour2<Float64>(res);
+    }
+
+    public static List<Point2<Float64>> getRandPoints(int count) {
+        List<Point2<Float64>> points = new LinkedList<Point2<Float64>>();
+        for (int i = 0; i < count; i++) {
+            if (i % 1000 == 0) {
+                System.out.println(i);
+            }
+            points.add(getPoint2(rand.nextDouble(), rand.nextDouble()));
+        }
+        return points;
+    }
+
+    public static boolean checkConvexHull(Contour2<Float64> a) {
+        for (int i = 0; i < a.size(); i++) {
+            if (orientation(a.get(i), a.get(i + 1), a.get(i + 2)) == Orientation.RIGHT) {
+                return false;
+            }
+        }
+        return true;
     }
 }

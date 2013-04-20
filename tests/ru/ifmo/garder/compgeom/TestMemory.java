@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestMemory {
-    private static final int N = (int) 1e7;
+    private static final int N = (int) 1e6;
 
     @Test
     public void testPoint2() {

@@ -8,7 +8,6 @@ import ru.ifmo.garder.compgeom.primitives.Rectangle2;
 import ru.ifmo.garder.compgeom.primitives.Segment2;
 
 import java.util.Collections;
-import java.util.ListIterator;
 
 
 public class Operations {
